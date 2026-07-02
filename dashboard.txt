@@ -1,0 +1,48 @@
+# Implementation Guide: GENESIS+ Dashboard
+
+This document provides technical specifications for implementing the **GENESIS+ Dashboard** ({{DATA:SCREEN:SCREEN_7}}), ensuring consistency with the established design system ({{DATA:DESIGN_SYSTEM:DESIGN_SYSTEM_1}}).
+
+## 1. Layout Structure
+The dashboard uses a two-column layout with a fixed sidebar for primary navigation and a scrollable main content area.
+
+- **Sidebar (SideNavBar):** Fixed `256px` (w-64) on the left. Full height (h-screen).
+- **Main Content:** Flex-grow area with responsive gutters (`px-margin-desktop`).
+- **Background:** `bg-surface` (#f8f9ff).
+
+## 2. Component Specifications
+
+### A. Sidebar Navigation
+- **Active State:** Background `bg-primary-container`, text `text-on-primary-container`, rounded-lg.
+- **Inactive State:** Text `text-on-surface-variant`, hover `bg-surface-container-high`.
+- **Emergency Support:** Fixed at bottom, `bg-error` (#b91c1c) for high visibility.
+
+### B. Daily Affirmation Card
+- **Background:** Solid `bg-secondary-container` (#d8b4fe).
+- **Icon:** "Sparkles" icon in a `bg-white/30` circular container.
+- **Button:** "Log Mood" uses `bg-primary` (#5b21b6) with `text-white`.
+
+### C. Recent Journal Entries
+- **Container:** White card with `rounded-2xl` (16px) and subtle purple shadow.
+- **Items:** Hoverable rows with transition.
+- **Icon Boxes:** `bg-accent` (#f3e8ff) with `text-primary`.
+- **"New Entry" Trigger:** Dashed border button with `text-on-surface-variant`.
+
+### D. Next Session Sidebar (Right)
+- **Container:** `bg-primary` (#5b21b6) with `text-white`.
+- **Timer Widget:** Semi-transparent white background (`bg-white/10`).
+- **Button:** White primary button with `text-primary`.
+
+### E. Quick Stats (Bottom Row)
+- **Grid:** 4-column responsive grid.
+- **Styling:** Individual cards with center-aligned icons in `bg-accent` circles.
+
+## 3. Interactive States & Logic
+- **Hover Effects:** All list items and cards should have a subtle scale-up or background shift (e.g., `hover:bg-surface-container-low`).
+- **Animations:** Use `fade-in-up` for card entry. Progress bars (Focus Level) should animate from 0 to target value on load.
+- **Responsiveness:** On mobile, the sidebar should collapse into a bottom navigation bar, and the 4-column stats grid should stack into 2x2.
+
+## 4. Design Tokens (Tailwind Reference)
+- **Primary:** `genesis-purple` (#5B21B6)
+- **Secondary:** `genesis-lilac` (#D8B4FE)
+- **Accent:** `genesis-pastel` (#F3E8FF)
+- **Shadow:** `shadow-[0_4px_6px_-1px_rgba(91,33,182,0.05)]`

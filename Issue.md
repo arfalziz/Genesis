@@ -1,136 +1,129 @@
-# Project Plan: Progressive Web Application (PWA) Kesehatan Mental
+# Genesis + : Progressive Web Application (PWA) Implementation Plan
 
-## 1. Overview Project
-Aplikasi web progresif (PWA) yang ditujukan untuk memberikan layanan kesehatan mental, modul video/audio, journaling rahasia (diary), dan layanan konsultasi dengan psikolog. Aplikasi ini dirancang agar responsif (mobile-first) dan dapat diinstal di perangkat pengguna selayaknya aplikasi native.
-
-## 2. Tech Stack
-- **Frontend Framework:** Vue.js (Direkomendasikan menggunakan Vue 3 + Composition API + Vite)
-- **Backend:** Node.js (Menggunakan framework seperti Express.js atau Fastify)
-- **Database:** MySQL
-- **ORM:** Drizzle ORM
-
-## 3. Arsitektur & Infrastruktur
-- PWA terkonfigurasi dengan service worker untuk kapabilitas offline dasar (caching asset statis) dan Web Manifest untuk instalasi (Add to Home Screen).
-- RESTful API digunakan untuk komunikasi antara Frontend Vue.js dan Backend Node.js.
-- Autentikasi berbasis **JWT (JSON Web Tokens)** untuk keamanan sesi pengguna.
+Dokumen ini berisi spesifikasi teknis dan rencana implementasi (planning) untuk project Progressive Web Application (PWA) **Genesis +**. Dokumen ini disusun secara rinci dan terstruktur agar mudah dipahami serta dapat langsung dieksekusi langkah demi langkah oleh Junior Programmer maupun AI Code Generator.
 
 ---
 
-## 4. Spesifikasi Halaman & Fitur Utama
+## 1. Teknologi (Tech Stack)
 
-### 4.1. Landing Page (Long Landing Page Form)
-- **Deskripsi:** Halaman utama beranda publik untuk menarik calon pengguna. Disusun secara memanjang (long-form) dengan struktur copywriting yang persuasif.
-- **Komponen Frontend:**
-  - **Hero Section:** Headline menarik, sub-headline, dan tombol Call to Action (CTA).
-  - **Problem & Solution:** Seksi yang menjelaskan masalah target audiens dan bagaimana aplikasi ini menjadi solusinya.
-  - **Features Showcase:** Penjelasan singkat mengenai fitur Video, Diary, dan Konsultasi.
-  - **Long Form / Lead Magnet:** Formulir di bagian tengah atau bawah halaman untuk langsung mendaftar atau mengumpulkan email (newsletter/waitlist).
-  - **Footer:** Tautan ke kebijakan privasi, syarat dan ketentuan, dll.
-
-### 4.2. Form Register & Login
-- **Deskripsi:** Sistem autentikasi agar pengguna dapat mengakses fitur-fitur personal.
-- **Komponen Frontend:**
-  - **Register:** Formulir input Nama, Email, Password, Konfirmasi Password. Harus ada validasi email dan kekuatan password di sisi klien.
-  - **Login:** Formulir input Email dan Password.
-- **Komponen Backend:**
-  - Endpoint `POST /api/auth/register`: Menyimpan user baru dengan hashing password (menggunakan `bcrypt` atau `argon2`).
-  - Endpoint `POST /api/auth/login`: Validasi kredensial dan mengembalikan JWT Token.
-
-### 4.3. Dashboard
-- **Deskripsi:** Halaman utama pengguna (Private Route) setelah berhasil login.
-- **Komponen Frontend:**
-  - **Welcome Banner:** Menyapa nama pengguna.
-  - **Quick Metrics / Tracker:** (Opsional) Menampilkan mood hari ini atau progress aktivitas.
-  - **Navigation Grid:** Menu cepat (Cards) menuju modul Video/Lagu, Diary Secrets, dan Layanan Konsultasi.
-  - Sidebar atau Bottom Navigation untuk mempermudah akses antar menu (PWA friendly).
-
-### 4.4. Modul Video dan Lagu (Relaksasi/Meditasi)
-- **Deskripsi:** Katalog media yang berisi video atau lagu untuk membantu relaksasi atau meditasi pengguna.
-- **Komponen Frontend:**
-  - **Media Library:** Tampilan daftar (Grid/List) lagu dan video yang bisa difilter (misal: "Untuk Tidur", "Fokus", "Penghilang Stres").
-  - **Media Player:** Custom audio/video player di dalam aplikasi.
-- **Komponen Backend:**
-  - Endpoint `GET /api/media`: Mengembalikan daftar URL media beserta metadatanya (judul, durasi, kategori). (URL media idealnya merujuk ke layanan storage eksternal seperti AWS S3 atau Cloudinary).
-
-### 4.5. Diary Secrets (Jurnal Rahasia)
-- **Deskripsi:** Ruang personal bagi pengguna untuk mencatat jurnal harian. Data dijamin rahasia.
-- **Komponen Frontend:**
-  - **Diary Editor:** Text area (atau Rich Text Editor sederhana) untuk menulis jurnal.
-  - **Mood Selector:** Pemilihan emoticon untuk mewakili perasaan hari itu.
-  - **History/Timeline:** Daftar entri jurnal yang telah lalu, diurutkan berdasarkan tanggal terbaru.
-- **Komponen Backend & Security:**
-  - Endpoint CRUD (`GET, POST, PUT, DELETE /api/diary`).
-  - **CRITICAL:** Data isi jurnal (content) **HARUS** dienkripsi sebelum disimpan ke MySQL (menggunakan algoritma enkripsi simetris seperti AES-256) agar tidak bisa dibaca langsung dari database.
-
-### 4.6. Layanan Konsultasi ke Psikolog
-- **Deskripsi:** Fitur untuk mencari dan membuat janji temu (appointment) dengan psikolog.
-- **Komponen Frontend:**
-  - **Directory Psikolog:** Daftar psikolog beserta foto, keahlian spesifik, tarif, dan ketersediaan waktu.
-  - **Booking System:** Antarmuka pemilihan tanggal dan jam untuk konsultasi.
-  - **My Appointments:** Halaman untuk melihat jadwal konsultasi yang akan datang atau histori konsultasi.
-- **Komponen Backend:**
-  - Endpoint `GET /api/psychologists`: Mengambil daftar psikolog.
-  - Endpoint `POST /api/appointments`: Memesan jadwal. Perlu validasi agar tidak ada bentrok jadwal (double booking).
+*   **Frontend**: Vite (Direkomendasikan menggunakan framework React atau Vue.js dengan TypeScript)
+*   **Backend**: Node.js (Direkomendasikan menggunakan framework Express.js atau Fastify)
+*   **Database**: MySQL
+*   **ORM (Object Relational Mapping)**: Drizzle ORM
 
 ---
 
-## 5. Panduan Skema Database (Drizzle ORM & MySQL)
-Berikut adalah referensi skema tabel awal yang harus diimplementasikan dengan Drizzle ORM:
+## 2. Struktur Modul & Fitur Utama
 
-1. **`users`**
-   - `id` (PK, UUID/Serial)
-   - `name` (Varchar)
-   - `email` (Varchar, Unique)
-   - `password_hash` (Varchar)
-   - `created_at` (Timestamp)
+Aplikasi Genesis + memiliki 6 komponen UI/UX dan fungsionalitas utama yang harus dibangun:
 
-2. **`media`**
-   - `id` (PK)
-   - `title` (Varchar)
-   - `type` (Enum: 'video', 'audio')
-   - `url` (Varchar)
-   - `category` (Varchar)
+### A. Landing Page (Long Landing Page Form)
+*   **Deskripsi**: Halaman utama yang dirancang bergaya *long-form* untuk menjelaskan *value proposition* aplikasi secara detail dan persuasif kepada pengunjung sebelum mereka mendaftar.
+*   **Komponen UI yang dibutuhkan**:
+    *   **Hero Section**: Judul utama yang menarik, sub-judul, dan Call-to-Action (CTA) "Daftar Sekarang".
+    *   **Features Section**: Penjelasan visual dari fitur utama (Video/Lagu, Diary, Konsultasi Psikolog).
+    *   **Testimonial / Trust Section**: Alasan mengapa Genesis+ aman dan terpercaya.
+    *   **Long Form CTA Form**: Form pendaftaran yang diletakkan langsung di bagian bawah halaman (inline form) untuk konversi yang cepat.
 
-3. **`diaries`**
-   - `id` (PK)
-   - `user_id` (FK to users)
-   - `content_encrypted` (Text)
-   - `mood_tag` (Varchar)
-   - `created_at` (Timestamp)
+### B. Form Register & Login
+*   **Deskripsi**: Sistem autentikasi dan manajemen sesi pengguna.
+*   **Backend (Node.js)**:
+    *   Endpoint `POST /api/auth/register` (wajib mengenkripsi/hash password menggunakan bcrypt atau argon2).
+    *   Endpoint `POST /api/auth/login` (mengembalikan JWT token untuk otorisasi endpoint selanjutnya).
+*   **Frontend**:
+    *   Halaman khusus Login dan Register dengan validasi input (contoh: email harus valid, password minimal 8 karakter).
+    *   Mekanisme penyimpanan JWT token dengan aman (di localStorage atau HttpOnly Cookies).
 
-4. **`psychologists`**
-   - `id` (PK)
-   - `name` (Varchar)
-   - `specialization` (Varchar)
-   - `bio` (Text)
+### C. Dashboard
+*   **Deskripsi**: Halaman *home* bagi pengguna setelah berhasil login. Karena berkonsep PWA, desain harus *mobile-friendly* layaknya aplikasi native.
+*   **Komponen UI**:
+    *   Navigasi (Sidebar untuk Desktop, Bottom Navigation untuk Mobile).
+    *   Header dengan profil pengguna dan notifikasi.
+    *   Widget/Card Ringkasan: Menampilkan aktivitas terbaru (contoh: status konsultasi terakhir, tombol cepat untuk menulis diary).
 
-5. **`appointments`**
-   - `id` (PK)
-   - `user_id` (FK to users)
-   - `psychologist_id` (FK to psychologists)
-   - `schedule_time` (Datetime)
-   - `status` (Enum: 'pending', 'confirmed', 'completed', 'cancelled')
+### D. Modul Video dan Lagu
+*   **Deskripsi**: Modul hiburan atau relaksasi untuk pengguna.
+*   **Backend**:
+    *   Endpoint `GET /api/media` untuk mengambil daftar katalog video dan lagu.
+*   **Frontend**:
+    *   Tampilan Grid/List view untuk memilih konten.
+    *   **Pemutar Video (Video Player)** bawaan atau kustom.
+    *   **Pemutar Audio (Audio Player)** untuk memutar lagu dengan UI kontrol musik standar (Play, Pause, Next).
+
+### E. Diary Secrets
+*   **Deskripsi**: Modul jurnal pribadi pengguna. Karena bernama "Secrets", aspek keamanan dan privasi sangat diutamakan.
+*   **Fitur CRUD**:
+    *   Create: Form untuk menulis catatan harian baru.
+    *   Read: Daftar catatan harian sebelumnya beserta fitur pencarian/filter.
+    *   Update: Mengedit isi diary.
+    *   Delete: Menghapus diary.
+*   **Catatan Keamanan (Penting)**: User hanya boleh mengakses diary miliknya sendiri. (Validasi *user_id* dari JWT).
+
+### F. Layanan Konsultasi ke Psikolog
+*   **Deskripsi**: Platform penghubung antara pengguna dengan profesional (Psikolog).
+*   **Fitur Utama**:
+    *   Daftar Psikolog: Tampilan daftar psikolog, spesialisasi, dan jadwal yang tersedia.
+    *   Sistem Booking/Appointment: Form bagi user untuk memilih jadwal konsultasi.
+    *   Status Konsultasi: Halaman untuk melihat status (Menunggu Konfirmasi, Disetujui, atau Selesai).
 
 ---
 
-## 6. Langkah-Langkah Pengerjaan (Step-by-Step)
-Instruksi untuk AI / Junior Developer saat memulai:
+## 3. Rencana Desain Database (MySQL + Drizzle ORM)
 
-1. **Inisialisasi Proyek:**
-   - Setup Node.js backend (npm init, install express, drizzle-orm, mysql2).
-   - Setup Vue frontend (Vite create vue). Tambahkan plugin `vite-plugin-pwa`.
-2. **Setup Database:**
-   - Konfigurasi koneksi MySQL di Node.js.
-   - Definisikan skema Drizzle sesuai panduan poin 5.
-   - Jalankan proses `drizzle-kit generate` dan migrasi ke MySQL.
-3. **Pengembangan Frontend (Vue.js):**
-   - Buat file routing (`vue-router`).
-   - Selesaikan UI Landing Page (Long form) dan Form Register/Login.
-   - Selesaikan UI Dashboard pengguna.
-   - Integrasikan halaman dengan API Backend menggunakan `fetch` atau `axios`.
-5. **Konfigurasi PWA:**
-   - Daftarkan manifest.json (ikon, warna tema, nama aplikasi).
-   - Konfigurasi service worker untuk caching dasar agar aplikasi bisa terbuka walau koneksi tidak stabil.
+Sebagai panduan awal bagi Drizzle ORM, berikut adalah entitas yang dibutuhkan:
 
-   intinya inisialisasi dulu, abis itu langsung fokus ke Frontendnya!!
-   
+1.  **Tabel `users`**
+    *   `id` (int, PK, auto-increment)
+    *   `name` (varchar)
+    *   `email` (varchar, unique)
+    *   `password_hash` (varchar)
+    *   `created_at` (timestamp)
+2.  **Tabel `media`**
+    *   `id` (int, PK)
+    *   `type` (enum: 'video', 'audio')
+    *   `title` (varchar)
+    *   `url` (varchar)
+3.  **Tabel `diaries`**
+    *   `id` (int, PK)
+    *   `user_id` (int, FK references users.id)
+    *   `title` (varchar)
+    *   `content` (text)
+    *   `created_at` (timestamp)
+4.  **Tabel `consultations`**
+    *   `id` (int, PK)
+    *   `user_id` (int, FK references users.id)
+    *   `psychologist_name` (varchar)
+    *   `scheduled_time` (datetime)
+    *   `status` (enum: 'pending', 'approved', 'completed')
+
+---
+
+## 4. Panduan Eksekusi Step-by-Step (Untuk Developer / AI)
+
+Ikuti urutan *milestone* berikut untuk membangun aplikasi secara terstruktur:
+
+### Milestone 1: Setup & Inisialisasi
+1.  Inisialisasi Frontend dengan `npm create vite@latest`.
+2.  Tambahkan `vite-plugin-pwa` ke dalam konfigurasi Vite untuk mengaktifkan fitur Progressive Web App (manifest.json, service workers).
+3.  Inisialisasi Backend Node.js dan install Drizzle ORM beserta *driver* `mysql2`.
+4.  Buat file `schema.ts` di backend berdasarkan rencana desain database di atas, lalu lakukan *Drizzle push/migrate* ke database MySQL.
+
+### Milestone 2: Sistem Autentikasi
+1.  Buat struktur tabel `users` di Drizzle.
+2.  Buat route dan controller untuk `/register` dan `/login` di Node.js.
+3.  Di Frontend, buat form Landing Page & Login, lalu sambungkan (fetch) ke API Backend. Terapkan penyimpanan JWT.
+
+### Milestone 3: Routing Frontend & Dashboard
+1.  Buat setup *Routing* (misal dengan React Router).
+2.  Pisahkan jalur publik (Landing, Login, Register) dan jalur privat (Dashboard, Diary, dll).
+3.  Bangun antarmuka Dashboard utama.
+
+### Milestone 4: Modul Fitur Inti
+1.  **Diary Secrets**: Buat skema tabel, API CRUD di backend, dan halaman editor di frontend.
+2.  **Layanan Konsultasi**: Buat form penjadwalan dan daftar riwayat jadwal.
+3.  **Video & Lagu**: Buat tabel *seeder* di DB untuk contoh data media, lalu tampilkan pemutarnya di frontend.
+
+### Milestone 5: PWA Polish & Testing
+1.  Pastikan aplikasi *fully responsive* untuk mobile device.
+2.  Pastikan Service Worker berhasil melakukan *caching* sehingga aplikasi tetap bisa dimuat cepat, dan muncul prompt "Install App" di perangkat mobile/desktop pengguna.
+3.  Lakukan *End-to-End Testing* dari pendaftaran sampai membuat jadwal konsultasi.

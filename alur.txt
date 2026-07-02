@@ -1,0 +1,81 @@
+====================================================
+ALUR PENGGUNAAN APLIKASI GENESIS+ (DARI AWAL - AKHIR)
+====================================================
+
+Aplikasi GENESIS+ memiliki dua kelompok pengguna utama: Pengguna Individu (User Reguler/Mahasiswa) dan Mitra Instansi (Kampus/Perusahaan B2B). Berikut adalah alur lengkap perjalanan mereka di dalam aplikasi.
+
+----------------------------------------------------
+BAGIAN 1: PINTU MASUK (LANDING PAGE)
+----------------------------------------------------
+1. Pengguna membuka situs utama GENESIS+ (halaman publik tanpa login).
+2. Di halaman ini, pengguna disajikan dengan informasi tentang:
+   - Ruang aman tanpa stigma.
+   - Tiga Pilar Intervensi (Hulu, Tengah, Hilir).
+   - Jaminan Keamanan & Privasi (Enkripsi & Identitas Samaran).
+3. Pengguna dihadapkan pada dua pilihan utama di Navbar:
+   - Opsi A: "Sign Up" (Untuk User Reguler)
+   - Opsi B: "Kemitraan Instansi" (Untuk Mitra/Organisasi)
+
+----------------------------------------------------
+BAGIAN 2: JALUR B2B (MITRA INSTANSI)
+----------------------------------------------------
+Jika memilih "Kemitraan Instansi":
+1. Autentikasi (/mitra/akses)
+   - Mitra (misal: pihak kampus) mendaftarkan organisasi mereka, atau login jika sudah punya akun.
+2. Dashboard Mitra (/mitra/beli-kuota)
+   - Mitra dapat melihat statistik kuota sesi konseling (Total, Digunakan, Sisa).
+   - Mitra membeli paket kuota (misal: Paket 100 Sesi).
+   - Mitra mendapatkan "Kode Token / Akses Instansi" (Contoh: UAPGENESIS2026).
+   - Mitra membagikan kode token ini secara mandiri kepada mahasiswa/karyawan mereka.
+
+----------------------------------------------------
+BAGIAN 3: JALUR USER (PENDAFTARAN & DASHBOARD UTAMA)
+----------------------------------------------------
+Jika pengguna individu mengklik "Sign Up":
+1. Pendaftaran Privat (/register)
+   - User mendaftar menggunakan email untuk otentikasi.
+   - User menetapkan "Nama Samaran" (Alias) untuk menjaga privasinya di dalam aplikasi.
+2. Dashboard Utama (/dashboard)
+   - Setelah login, user masuk ke ruang pribadinya.
+   - Di sini user akan melihat sapaan hangat, afirmasi harian, jurnal harian terbaru, status pemulihan, dan jadwal sesi konseling yang akan datang.
+   - Dari dashboard, user bisa mengakses Pilar Hulu (Edukasi), Pilar Tengah (Diary), dan Pilar Hilir (Konseling).
+
+----------------------------------------------------
+BAGIAN 4: PILAR TENGAH (ENCRYPTED DIARY)
+----------------------------------------------------
+1. Navigasi ke (/diary)
+   - User dapat menulis keluh kesah harian mereka secara aman. Data akan dienkripsi dari sisi klien (klien-side encryption) sebelum dikirim ke server.
+
+----------------------------------------------------
+BAGIAN 5: PILAR HILIR (ALUR KONSELING & PEMBAYARAN)
+----------------------------------------------------
+Jika user siap untuk berbicara dengan profesional, mereka masuk ke menu "Layanan Konseling" (/consultation).
+
+Tahap 1: Pilih Psikolog
+- User melihat daftar psikolog klinis yang tersedia beserta spesialisasi mereka. User memilih salah satu psikolog.
+
+Tahap 2: Atur Waktu & Lembar Latar Belakang
+- User memilih Tanggal dan Jam Sesi (WIB).
+- User mengisi "Lembar Latar Belakang", menceritakan secara singkat masalah atau keresahan yang sedang dirasakan agar psikolog memiliki konteks awal.
+- Klik "Simpan".
+
+Tahap 3: Pembayaran
+User dihadapkan pada dua metode pembayaran:
+  -> Opsi A (Bayar Mandiri):
+     - Memilih Transfer VA Bank atau QRIS.
+     - Melakukan pembayaran sebesar Rp 150.000.
+     - Transaksi divalidasi oleh payment gateway.
+
+  -> Opsi B (Mitra Instansi):
+     - User memilih tab "Mitra Instansi".
+     - User memasukkan "Kode Token" yang mereka dapatkan dari kampus/perusahaan (misal: UAPGENESIS2026).
+     - Jika valid, sistem memotong kuota instansi, dan tagihan user otomatis dicoret menjadi Rp 0.
+
+Tahap 4: Masuk Ruang Tunggu
+- Setelah pembayaran atau verifikasi token sukses, muncul tombol "Masuk Ruang Sesi".
+- User diarahkan ke "Waiting Room" untuk menunggu hingga psikolog online dan siap menerima sesi pada jadwal yang ditentukan.
+
+Tahap 5: Sesi Konseling (Chat Real-Time)
+- Sesi dimulai. User (dengan Nama Samarannya) dan Psikolog terhubung melalui ruang obrolan (chat) privat dan terenkripsi.
+- Setelah sesi selesai selama 45 menit, user atau psikolog dapat mengakhiri sesi.
+- Alur konseling selesai, dan user dikembalikan ke tampilan awal Daftar Psikolog atau Dashboard.

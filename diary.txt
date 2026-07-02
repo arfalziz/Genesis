@@ -1,0 +1,51 @@
+# Implementation Plan: GENESIS+ Balanced Mind Journal
+
+This document outlines the technical specifications for implementing the **Balanced Mind Journal** ({{DATA:SCREEN:SCREEN_6}}), ensuring high-fidelity translation from design to code within the GENESIS+ ecosystem ({{DATA:DESIGN_SYSTEM:DESIGN_SYSTEM_1}}).
+
+## 1. Layout & Architecture
+The journal follows a "Sanctuary" layout: a fixed navigation sidebar paired with a wide, focused writing canvas.
+
+- **Sidebar (SideNavBar):** Fixed width of `256px` (w-64). Full viewport height. 
+- **Main Canvas:** A responsive, center-aligned container with a max-width of `1024px` to prevent line lengths from becoming too long for comfortable reading.
+- **Background:** `bg-surface` (#f8f9ff) to provide a soft, low-glare writing surface.
+
+## 2. Component Breakdown
+
+### A. Navigation Sidebar
+- **Brand Identity:** Logo in `text-primary` (#5b21b6) using *Plus Jakarta Sans*.
+- **Active State:** The "Journal" tab uses `bg-secondary-container/20` with a `border-r-4 border-primary` for clear orientation.
+- **Privacy Shield:** A persistent status indicator in the footer confirming E2E encryption is active.
+
+### B. Header & Stats
+- **Zen Mode Toggle:** A custom switch in the top right. When active, it should trigger a CSS transition to hide the Sidebar and Recent Reflections, leaving only the writing canvas.
+- **Self-Care Counter:** Minimalist text layout: "124 Days of Self-Care" with a small heart icon.
+
+### C. Daily Spark (Inspiration Card)
+- **Container:** `bg-secondary-container` (#d8b4fe) with `rounded-2xl` (16px).
+- **Typography:** The prompt text uses *Plus Jakarta Sans* Medium for a "warm" clinical feel.
+- **Logic:** This section should be dismissible or swipable to reveal different prompts.
+
+### D. Clean Text Canvas (Rich Text Editor)
+- **Toolbar:** Floating or fixed sub-header with formatting icons (Bold, Italic, List, Quote).
+- **Voice-to-Text:** A dedicated microphone button that triggers the browser's Web Speech API.
+- **Writing Area:** An unstyled `textarea` or content-editable `div` with a large `line-height: 1.6` and `text-lg` for readability.
+- **Auto-Save:** Indicator text ("Saving automatically...") that toggles visibility on input change.
+
+### E. Recent Reflections (Right Sidebar)
+- **Layout:** Vertical stack of cards on the right (desktop only).
+- **Cards:** White background, `rounded-xl`, subtle purple shadow (`shadow-[0_4px_6px_-1px_rgba(91,33,182,0.05)]`).
+- **Tags:** Color-coded pill tags (e.g., #f3e8ff for "Growth").
+
+## 3. Interaction Logic & Animations
+- **Focus Mode:** When the user starts typing, the toolbar and secondary buttons should slightly fade in opacity to 50% to reduce distraction.
+- **Transitions:** Use `transition-all duration-300` for the Zen Mode toggle.
+- **Micro-interactions:** 
+  - Buttons: `active:scale-95` for tactile feedback.
+  - Journal Cards: `hover:translate-x-1` and background shift.
+
+## 4. Technical Tokens (Tailwind)
+- **Primary:** `text-primary` (#5B21B6)
+- **Secondary:** `bg-secondary-container` (#D8B4FE)
+- **Accent:** `bg-accent` (#F3E8FF)
+- **Border Radius:** `rounded-2xl` (16px) for major cards, `rounded-lg` (8px) for buttons.
+- **Shadows:** `shadow-sm` with a purple tint.

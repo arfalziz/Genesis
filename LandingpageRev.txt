@@ -1,0 +1,81 @@
+ANALISIS DAN REVISI DESAIN LANDING PAGE GENESIS+
+=================================================
+
+[ BAGIAN NAVBAR ]
+Sisi Kiri (Logo): GENESIS+ (Warna Ungu Tua #5B21B6, Font Bold)
+
+Sisi Tengah: Beranda | Tiga Pilar | Jaminan Privasi | Cara Kerja
+
+Sisi Kanan: [ Masuk Aplikasi ] (Tombol box warna Ungu Tua, teks Putih)
+
+[ LAYAR 1: THE HERO SECTION (Pemicu Ketertarikan) ]
+Teks Kecil di Atas Judul: 🌟 SEBUAH LANGKAH AWAL TANPA STIGMA
+
+Headline Utama: "Ruang Aman untuk Bertumbuh, Memahami, dan Pulih."
+
+Sub-Headline: "GENESIS+ menghadirkan ekosistem intervensi sosial dan psikologis terintegrasi dari hulu ke hilir. Kami hadir menemani perjalanan pola asuh keluarga, membimbing navigasi krisis identitas pemuda, hingga merangkul rekonstruksi orientasi diri. Semua bergerak di dalam ruang digital yang privat, aman, dan penuh empati."
+
+Tombol CTA Utama: [ Mulai Perjalanan Anda (Gratis) ]
+
+Catatan di bawah tombol: 🔒 Pendaftaran aman menggunakan sistem Nama Samaran (Alias).
+
+[ LAYAR 2: TIGA PILAR INTERVENSI (Edukasi Solusi) ]
+Judul Section: "Satu Platform. Tiga Tahap Intervensi Komprehensif."
+
+Kartu 1 (Hulu - Fondasi Keluarga & Pola Asuh):
+"Membangun benteng pertama dari dalam rumah. Akses puluhan modul pembelajaran interaktif mengenai pola asuh ramah anak. Dilengkapi dengan video edukasi dan lagu-lagu Audio-Mnemonic yang easy-listening untuk membantu orang tua menanamkan edukasi karakter, moralitas, dan identitas diri yang kokoh pada anak sejak dini."
+
+Kartu 2 (Tengah - Navigasi & Identitas Pemuda):
+"Menuntun langkah di masa penuh keraguan. Ditujukan bagi pemuda yang sedang menghadapi krisis orientasi diri dan konflik identitas. Temukan arah melalui video bimbingan empati dari para pakar, serta tuangkan keluh kesahmu di Encrypted Digital Diary—sebuah ruang ekspresi privat yang menjaga rahasiamu tetap utuh."
+
+Kartu 3 (Hilir - Pemulihan & Intervensi Klinis):
+"Layanan intervensi dan rehabilitasi mendalam bagi individu yang berkomitmen melakukan pemulihan diri. Terhubung secara privat lewat Chat Real-Time bersama psikolog klinis profesional dan konselor yang siap membimbing proses pemulihan kembali ke jati diri tanpa penghakiman."
+
+[ LAYAR 3: JAMINAN KEAMANAN & PRIVASI (Penghancur Keraguan) ]
+Judul Section: "Privasi Anda Adalah Hak Mutlak. Kami Melindunginya."
+
+Sistem Nama Samaran (Masked Identity): "Daftar dengan email Anda untuk validasi akun, tetapi identitas aslimu dikunci rapat. Di dalam aplikasi dan di layar psikolog, Anda bergerak menggunakan Nama Alias pilihan Anda sendiri."
+
+Enkripsi Data Sisi Klien (AES-256): "Setiap baris kalimat di Diary Digital diubah menjadi kode acak rahasia langsung dari perangkat Anda sebelum dikirim ke server. Bahkan tim pengembang GENESIS+ tidak bisa membacanya."
+
+[ LAYAR 4: CARA KERJA & FINAL CALL-TO-ACTION ]
+Alur 3 Langkah Sederhana: 1. Setup Profil Privat (Pilih Nama Samaran) -> 2. Jelajahi Ekosistem (Akses Video/Audio Modul) -> 3. Konseling (Mulai Chat Real-time).
+
+Boks Banner Final CTA: "Satu keputusan kecil hari ini bisa mengubah masa depan emosional Anda dan keluarga. Kamu tidak sendirian, mari melangkah bersama."
+
+Tombol CTA Akhir: [ Mulai Bersama GENESIS+ ]
+
+
+
+Setelah melakukan peninjauan terhadap desain dan implementasi terkini dari `LandingPage.vue`, berikut adalah poin-poin yang menjadi kelemahan (kekurangan) dan rekomendasi perbaikan untuk meningkatkan kualitas User Experience (UX) dan User Interface (UI):
+
+1. KEKURANGAN VISUAL (Kesan "Kering" / Text-Heavy)
+- Masalah: Saat ini Landing Page sangat mengandalkan teks (Text-Heavy) dan ikon SVG sederhana. Tidak ada gambar, ilustrasi, atau foto yang menggambarkan "kesehatan mental" atau "kedamaian", yang mana sangat penting untuk membangun koneksi emosional dengan pengguna.
+- Perbaikan: Tambahkan area untuk ilustrasi vektor atau foto bernuansa lembut (misalnya orang yang sedang bermeditasi, atau ilustrasi abstrak yang menenangkan) terutama di Hero Section (layar 1) dan Cara Kerja (layar 4).
+
+2. NAVIGASI DAN PENGALAMAN SCROLLING
+- Masalah: Tautan pada Navbar (seperti "Tiga Pilar", "Cara Kerja") mengarah ke anchor link (misal: `#pilar`). Namun, efek *smooth scrolling* belum diaktifkan secara global di CSS. Akibatnya, saat tautan diklik, halaman akan berpindah secara kasar/instan.
+- Perbaikan: Tambahkan konfigurasi `scroll-behavior: smooth;` pada elemen `html` di dalam `style.css`.
+
+3. RESPONSIVITAS PADA PERANGKAT MOBILE
+- Masalah: Beberapa bagian memiliki *padding* vertikal yang cukup besar (`py-24` atau sekitar 96px). Di layar HP (*mobile*), jarak ini bisa memakan terlalu banyak ruang kosong dan membuat pengguna harus melakukan *scroll* terlalu panjang.
+- Perbaikan: Kurangi padding pada layar kecil menjadi `py-16` atau `py-12`, dan tetap pertahankan `md:py-24` untuk layar *desktop*.
+
+4. AKSESIBILITAS (A11Y)
+- Masalah: Beberapa elemen grafis (seperti SVG Icon) dibaca oleh alat pembaca layar (*screen reader*) sebagai elemen acak jika tidak diberikan atribut pelengkap.
+- Perbaikan: Tambahkan atribut `aria-hidden="true"` pada setiap tag `<svg>` dekoratif. Serta pastikan setiap link (terutama link anchor) memiliki `aria-label` yang jelas.
+
+5. LOGO DAN IDENTITAS BRAND
+- Masalah: Di sudut kiri atas, Logo hanya berupa teks statis "GENESIS+". 
+- Perbaikan: Akan jauh lebih baik jika teks tersebut didampingi oleh *brand mark* atau ikon logo khusus yang melambangkan Genesis+ (misalnya ikon daun, cahaya, atau perisai pelindung yang digabungkan dengan lambang plus).
+
+6. HIERARKI KARTU "TIGA PILAR"
+- Masalah: Teks deskripsi di dalam setiap kartu Pilar (Hulu, Tengah, Hilir) cukup panjang. Saat ini jarak antar baris (*line-height*) sudah baik, namun teks panjang di dalam tiga kolom sejajar (*grid*) dapat membuat kartu tampak sangat penuh.
+- Perbaikan: Buat teks lebih ringkas, atau tambahkan tombol "Baca Selengkapnya" agar tinggi kartu tidak menjadi tidak seimbang jika dilihat di layar *tablet*.
+
+7. ANIMASI MIKRO (MICRO-INTERACTIONS)
+- Masalah: Meskipun efek transisi dasar sudah ada (saat di-*hover* warna berubah), aplikasi PWA modern biasanya memiliki efek kemunculan (*fade-in* atau *slide-up*) saat di-*scroll*.
+- Perbaikan: Terapkan pustaka animasi sederhana seperti `AOS` (Animate On Scroll) atau gunakan *Intersection Observer* bawaan Vue untuk memunculkan elemen secara dinamis ketika masuk ke dalam layar pengguna.
+
+=================================================
+Kesimpulan: Secara struktur kode dan warna, halaman ini sudah sangat sesuai dengan pedoman dasar (Design.md & landingpage.txt). Langkah selanjutnya adalah menambahkan aset visual (ilustrasi/gambar), menghaluskan pengalaman interaksi (*smooth scroll & micro-animations*), serta memperbaiki proporsi ruang kosong (padding) untuk pengguna handphone.

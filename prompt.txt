@@ -1,0 +1,22 @@
+buatkan Issue.md yang isinya adalah planning untuk project Progressive Web application yang berisi :
+
+
+Tech Stack yang digunakan: 
+- Vue (framework )
+- Node.Js (Backend)
+- MySql (Database)
+- Drizzle (ORM)
+
+
+Dengan strukturnya adalah sebegai berikut:
+Landing page menggunakan Long Landing Page Form
+Form Register & Login
+Dashboard 
+modul Video dan lagu
+diary Secrets
+Layanan Konsultansi ke Psikolog
+
+buatkan dengan jelas  karena nanti akan digenerate oleh junior programming atau ai model yang lebih rendah
+
+
+

@@ -1,0 +1,48 @@
+🗺️ Alur Navigasi Awal (Dari Landing Page ke Portal Mitra)
+1. Pintu Masuk: Landing Page Utama (GENESIS+ Home)
+Ketika ada orang membuka situs utama GENESIS+, halamannya adalah halaman publik yang bisa diakses siapa saja tanpa login.
+
+Letak Tombol: Di bagian paling atas (Navbar kanan, di sebelah tombol "Masuk/Daftar User") atau di bagian paling bawah (Footer), buat satu tombol dengan style border outline tipis yang elegan.
+
+Teks Tombol: "Kemitraan Instansi" atau "GENESIS+ for Business".
+
+Interaksi: Begitu tombol ini diklik oleh pihak perwakilan kampus/perusahaan, browser akan mengarahkan (redirect) mereka keluar dari rute user biasa menuju halaman portal khusus mitra.
+
+2. Gerbang Validasi: Halaman Autentikasi Mitra (/mitra/akses)
+Halaman ini dirancang khusus untuk membedakan antara akun personal dan akun organisasi. Tampilannya mirip form login biasa, tapi dengan sub-copy yang menegaskan fungsinya: "Portal Manajemen Kesehatan Mental Instansi & Korporasi".
+
+Opsi A (Belum Punya Akun Mitra): Mereka klik "Daftar Instansi" ➔ Mengisi nama organisasi (misal: Universitas Aisyah Pringsewu), email resmi instansi, dan nomor kontak penanggung jawab.
+
+Opsi B (Sudah Punya Akun Mitra): Mereka tinggal masukkan email korporat dan password yang sudah terdaftar.
+
+3. Halaman Tujuan Utama: Dashboard B2B (/mitra/beli-kuota)
+Setelah sukses login/daftar, sistem backend akan langsung melempar mereka masuk ke halaman yang kita bahas sebelumnya. Di sinilah mereka melihat tampilan pengelolaan kuota, bisa memilih paket sesi konseling (misal: Paket 100 Sesi), melakukan transaksi pembayaran massal, dan langsung mendapatkan Kode Token/Voucher unik dari sistem.
+
+NAhhh kemudian setelah memilih Psikolog dan memilih jadwal kemudian ketika di klik konfirmasi maka alurnya akan seperti ini 
+👤 Lanjutan Detail Langkah Interaksi (User Side)
+🚀 Jalur A (User Umum - Bayar Mandiri) — Lanjutan
+Aplikasi memicu integrasi payment gateway. Setelah pembayaran diselesaikan oleh user, webhook backend mendeteksi status sukses, lalu mengubah data payment_status di tabel database menjadi 'paid'.
+
+🏢 Jalur B (User Mahasiswa - Mitra Instansi)
+Pilihan metode bank/QRIS disembunyikan. Muncul kolom input teks "Kode Akses / Token Instansi".
+
+User mengetikkan kode token (misal: UAPGENESIS2026) yang didapat dari pihak kampusnya, lalu klik tombol "Verifikasi Token".
+
+Frontend melakukan hit API POST /api/v1/voucher/validate dengan membawa data voucher_code.
+
+Proses Validasi di Backend (Backstage Logic):
+
+Backend mengecek ke database tabel vouchers: Apakah kodenya ada? Apakah is_active masih true? Dan apakah kuota masih tersedia (quota_used < quota_total)?
+
+Jika Tidak Valid: Backend melempar respon eror status 400. Frontend menangkap respon tersebut dan menampilkan teks peringatan merah pudar di bawah input: "Kode voucher tidak valid atau kuota instansi telah habis." Status transaksi tetap pending.
+
+Jika Valid: Backend melempar respon sukses status 200. Di saat yang sama, backend langsung melakukan operasi Atomik Update di database: mengubah quota_used = quota_used + 1 dan mengubah status Janji Temu (appointments) si user menjadi 'paid'.
+
+Respons Frontend: Begitu menerima status sukses 200 dari backend, nominal tagihan Rp 150.000 di kolom kiri langsung dicoret dan berubah menjadi Rp 0. Muncul notifikasi hijau lembut: "Token berhasil diverifikasi! Sesi kamu sepenuhnya ditanggung oleh Universitas Aisyah Pringsewu."
+
+🏁 Langkah 4: Finalisasi & Pengalihan ke Ruang Sesi
+Setelah salah satu dari dua jalur di atas sukses menyatakan status transaksi berubah menjadi 'paid', alur penutupan sebelum konseling adalah sebagai berikut:
+
+Perubahan Status Tombol Utama: Tombol di bagian paling bawah halaman (PaymentCard.vue) yang tadinya bertuliskan "Lanjut ke Pembayaran" atau "Verifikasi Token", otomatis berubah total menjadi tombol utama berwarna ungu solid bertuliskan "Masuk Ruang Sesi" dengan ikon gembok terbuka.
+
+Trigger Router: Ketika user mengklik tombol "Masuk Ruang Sesi" tersebut, Vue akan menjalankan perintah:

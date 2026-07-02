@@ -1,0 +1,48 @@
+# GENESIS+ Counseling Flow: Design System Documentation
+
+## 1. Core Philosophy: "The Trust Journey"
+The Counseling Flow is designed to transition the user from a state of seeking help to a state of active, secure communication. The visual language balances **Clinical Trust** (Deep Purple) with **Emotional Safety** (Classic Lilac and whitespace).
+
+## 2. Visual Identity & Color Psychology
+- **Primary (Deep Purple - #5B21B6):** Used for primary conversion points (booking buttons, "Simpan") and active branding elements. Represents stability and professional expertise.
+- **Secondary (Classic Lilac - #D8B4FE):** Used for progress indicators, secondary highlights, and user-centric features. Represents empathy and emotional openness.
+- **Accent (Soft Pastel Lilac - #F3E8FF):** Applied to user chat bubbles and subtle section backgrounds to provide a "soft" feel.
+- **Neutral (Off-White - #F8F9FF):** The primary background color, chosen to reduce cognitive load and create a "breathable" sanctuary.
+
+## 3. Typography (Plus Jakarta Sans & Inter)
+- **Headings (H1/H2):** Plus Jakarta Sans (Bold/Semi-Bold). Used for section titles like "Temukan Teman Berbagi" to establish a warm yet authoritative tone.
+- **UI Labels & Buttons:** Plus Jakarta Sans (Medium). High legibility for critical actions.
+- **Body & Chat Content:** Inter (Regular). Used for message bubbles and descriptive text where maximum readability is required.
+
+## 4. The 3-Step Interaction Framework
+To minimize user overwhelm, the counseling experience is divided into three distinct, reactive states:
+
+### Phase 1: The Trust Directory (Counseling Center)
+- **Anatomy:** A responsive grid of psychologist profile cards.
+- **Profile Cards:** Feature `16px` (2xl) rounded corners, subtle purple-tinted shadows, and clear hierarchy between name, credentials, and specialty tags.
+
+### Phase 2: The Scheduling Form & Sanctuary Paper
+- **Layout:** A centered, white container (`rounded-2xl`) that houses both administrative and reflective tasks.
+- **Progress Indicator:** A minimalist, thin-line indicator positioned at the top of the form container.
+- **Scheduling Inputs:** Standardized `8px` (lg) rounded input fields with soft border colors.
+- **Sanctuary Paper:** A "Notion-style" blank canvas for the user's background story. No rigid borders; uses generous line-height (1.6) and empathetic placeholder text.
+
+### Phase 3: Secure Counseling Chat
+- **Encryption Cues:** A persistent "End-to-End Encrypted" banner at the top of the chat thread.
+- **Bubble Logic:**
+  - **User:** Soft Pastel Lilac background, right-aligned.
+  - **Psychologist:** Pure White background with a thin gray border, left-aligned.
+- **Input Area:** A floating, minimalist bar with quick-action icons (attachment, emoji) and a prominent "Send" button.
+
+## 5. Component Language (Soft-Edge Design)
+- **Border Radius:**
+  - Containers/Modals: `16px` (2xl)
+  - Interactive/Inputs: `8px` (lg)
+- **Shadow Treatment:** `shadow-[0_4px_6px_-1px_rgba(91,33,182,0.05)]` — adding depth without creating harshness.
+- **Micro-interactions:** 
+  - `active:scale-95` on all primary buttons.
+  - Smooth opacity transitions when switching between flow states.
+
+## 6. Accessibility & Security Visuals
+- **Safety Indicators:** Consistent use of the "Shield" and "Lock" icons in Deep Purple to reassure users of privacy.
+- **Contrast:** Maintains WCAG AAA standards for all primary text content against white/off-white backgrounds.
