@@ -1,6 +1,6 @@
 export const userProfile = {
   name: 'SobatGenesis_404',
-  avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sobat',
+  avatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Sobat',
   role: 'admin' // Added admin role
 };
 
@@ -36,7 +36,7 @@ export const psychologists = [
     name: 'Dr. Sarah Amalia', 
     title: 'S.Psi, M.Psi, Psikolog', 
     spec: 'Kecemasan & Depresi', 
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah', 
+    avatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Sarah', 
     rating: 4.9,
     reviews: 128
   },
@@ -45,7 +45,7 @@ export const psychologists = [
     name: 'Bima Satria', 
     title: 'M.Psi, Psikolog Klinis', 
     spec: 'Krisis Identitas & Karir', 
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Bima', 
+    avatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Bima', 
     rating: 4.8,
     reviews: 95
   },
@@ -54,7 +54,7 @@ export const psychologists = [
     name: 'Nadia Putri', 
     title: 'S.Psi, M.Psi, Psikolog', 
     spec: 'Hubungan & Keluarga', 
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nadia', 
+    avatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Nadia', 
     rating: 5.0,
     reviews: 210
   },
@@ -63,7 +63,7 @@ export const psychologists = [
     name: 'Dr. Kevin Wijaya', 
     title: 'Psikolog Klinis Dewasa', 
     spec: 'Manajemen Stres & Trauma', 
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kevin', 
+    avatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Kevin', 
     rating: 4.7,
     reviews: 84
   }

@@ -5,7 +5,8 @@ import { RouterLink } from 'vue-router'
 <template>
   <div class="min-h-screen bg-bgOff flex items-center justify-center p-4 font-sans">
     <div class="max-w-md w-full bg-bgLight rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-      <div class="bg-primary p-6 text-center">
+      <div class="bg-primary p-6 text-center flex flex-col items-center">
+        <img src="/images/logo.png" alt="Genesis+ Logo" class="w-20 h-20 object-contain mb-4 drop-shadow-lg p-2 bg-white/10 rounded-2xl backdrop-blur-sm" />
         <h1 class="text-3xl font-extrabold text-white">Buat Akun</h1>
         <p class="text-accent mt-2">Mulai perjalanan pemulihanmu bersama Genesis+</p>
       </div>
