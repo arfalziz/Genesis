@@ -13,6 +13,21 @@
   <!-- Mobile Overlay -->
   <div v-if="mobileMenuOpen" @click="mobileMenuOpen = false" class="md:hidden fixed inset-0 bg-black/50 z-40"></div>
 
+  <!-- Logout Modal -->
+  <div v-if="showLogoutModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl transition-all" @click.stop>
+      <div class="w-12 h-12 rounded-full bg-error/10 flex items-center justify-center mb-4">
+        <svg class="w-6 h-6 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-2">Konfirmasi Keluar</h3>
+      <p class="text-gray-600 mb-6 text-sm">Apakah kamu yakin ingin keluar dari aplikasi Mitra?</p>
+      <div class="flex gap-3 justify-end">
+        <button @click="showLogoutModal = false" class="px-4 py-2 rounded-lg font-medium text-gray-600 hover:bg-gray-100 transition-colors">Batal</button>
+        <button @click="executeLogout" class="px-4 py-2 rounded-lg font-medium bg-error text-white hover:bg-error/90 transition-colors shadow-sm">Ya, Keluar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Sidebar -->
   <aside 
     class="bg-[#EEF2FC] border-r border-outline-variant/40 flex flex-col justify-between shrink-0 fixed md:sticky top-0 bottom-0 z-50 transition-all duration-300 md:cursor-pointer"
@@ -89,10 +104,10 @@
       </div>
       
       <div class="space-y-1">
-        <router-link to="/" class="w-full flex items-center px-4 py-2 text-sm text-error hover:bg-error/10 rounded-lg font-medium transition-colors mt-1" :class="isCollapsed ? 'md:justify-center' : 'gap-3'" :title="isCollapsed ? 'Keluar' : ''">
+        <button @click.stop="confirmLogout" class="w-full flex items-center px-4 py-2 text-sm text-error hover:bg-error/10 rounded-lg font-medium transition-colors mt-1 cursor-pointer" :class="isCollapsed ? 'md:justify-center' : 'gap-3'" :title="isCollapsed ? 'Keluar' : ''">
           <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> 
           <span :class="isCollapsed ? 'md:hidden' : ''" class="whitespace-nowrap">Keluar</span>
-        </router-link>
+        </button>
       </div>
     </div>
   </aside>
@@ -100,6 +115,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
   activeTab: {
@@ -112,10 +128,21 @@ const emit = defineEmits(['change-tab']);
 
 const isCollapsed = ref(false);
 const mobileMenuOpen = ref(false);
+const showLogoutModal = ref(false);
+const router = useRouter();
 
 const handleAsideClick = () => {
   if (window.innerWidth >= 768) {
     isCollapsed.value = !isCollapsed.value;
   }
+};
+
+const confirmLogout = () => {
+  showLogoutModal.value = true;
+};
+
+const executeLogout = () => {
+  showLogoutModal.value = false;
+  router.push('/');
 };
 </script>

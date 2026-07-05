@@ -6,11 +6,11 @@ import { RouterLink } from 'vue-router'
   <div class="w-full min-h-screen m-0 p-0 overflow-x-hidden bg-bgOff font-sans text-textMain selection:bg-secondary/50">
     <!-- Navbar -->
     <header class="fixed top-0 left-0 right-0 z-20 bg-bgLight/95 backdrop-blur-md border-b border-gray-100 shadow-sm w-full transition-all duration-300">
-      <div class="w-full px-6 md:px-12 lg:px-24 h-20 md:h-24 flex items-center justify-between">
+      <div class="w-full px-4 md:px-12 lg:px-24 h-16 md:h-24 flex items-center justify-between">
         <div class="flex items-center gap-2 animate-fade-in-up">
           <!-- Logo Icon -->
-          <img src="/images/logo.png" alt="Genesis+ Logo" class="w-10 h-10 object-contain drop-shadow-md" />
-          <span class="font-bold text-2xl tracking-tight text-primary">GENESIS+</span>
+          <img src="/images/logo.png" alt="Genesis+ Logo" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-md" />
+          <span class="font-bold text-lg md:text-2xl tracking-tight text-primary hidden sm:block">GENESIS+</span>
         </div>
         <nav class="hidden md:flex gap-8 animate-fade-in-up" style="animation-delay: 0.1s">
           <a href="#beranda" class="text-textMuted hover:text-primary transition-colors font-medium">Beranda</a>
@@ -18,9 +18,12 @@ import { RouterLink } from 'vue-router'
           <a href="#privasi" class="text-textMuted hover:text-primary transition-colors font-medium">Jaminan Privasi</a>
           <a href="#cara-kerja" class="text-textMuted hover:text-primary transition-colors font-medium">Cara Kerja</a>
         </nav>
-        <div class="flex items-center gap-4 animate-fade-in-up" style="animation-delay: 0.2s">
-          <RouterLink to="/mitra/akses" class="border border-primary text-primary hover:bg-primary/5 px-4 py-2 rounded-lg font-medium transition-all" aria-label="Portal Kemitraan">Kemitraan Instansi</RouterLink>
-          <RouterLink to="/login" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg font-medium transition-all shadow-sm hover:shadow-md" aria-label="Masuk Aplikasi">Sign Up</RouterLink>
+        <div class="flex items-center gap-2 md:gap-4 animate-fade-in-up" style="animation-delay: 0.2s">
+          <RouterLink to="/mitra/akses" class="border border-primary text-primary hover:bg-primary/5 px-2 py-1.5 md:px-4 md:py-2 text-xs md:text-base rounded-lg font-medium transition-all" aria-label="Portal Kemitraan">
+            <span class="hidden sm:inline">Kemitraan Instansi</span>
+            <span class="sm:hidden">Mitra</span>
+          </RouterLink>
+          <RouterLink to="/login" class="bg-primary hover:bg-primary/90 text-white px-3 py-1.5 md:px-5 md:py-2 text-xs md:text-base rounded-lg font-medium transition-all shadow-sm hover:shadow-md" aria-label="Masuk Aplikasi">Sign Up</RouterLink>
         </div>
       </div>
     </header>
